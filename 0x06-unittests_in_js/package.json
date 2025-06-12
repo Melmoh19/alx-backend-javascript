@@ -1,17 +1,18 @@
 {
   "name": "0x06-unittests_in_js",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "unittests in JS",
+  "main": "0-calcul.js",
   "scripts": {
-    "test": "mocha"
+    "test": "node test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
   "devDependencies": {
-    "chai": "^5.1.2",
-    "mocha": "^10.8.2",
-    "sinon": "^19.0.2"
+    "chai": "^5.2.0",
+    "mocha": "^11.6.0",
+    "sinon": "^20.0.0"
   }
 }
