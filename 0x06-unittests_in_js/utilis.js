@@ -1,22 +1,19 @@
 const Utils = {
-  calculateNumber: (type, a, b) {
-    const valA = Math.round(a);
-    const valB = Math.round(b);
-    if (type === 'SUM') {
-      return valA + valB;
-    }
-    else if (type === 'SUBTRACT') {
-      return valA - valB;
-    }
-    else if (type === 'DIVIDE') {
-      if (valB === 0) {
-        return "Error";
-      }
-      else {
-        return valA / valB;
-      }
+  calculateNumber(type, a, b) {
+    const roundedA = Math.round(a);
+    const roundedB = Math.round(b);
+
+    switch (type) {
+      case 'SUM':
+        return roundedA + roundedB;
+      case 'SUBTRACT':
+        return roundedA - roundedB;
+      case 'DIVIDE':
+        return roundedB === 0 ? 'Error' : roundedA / roundedB;
+      default:
+        throw new Error('Invalid type');
     }
   }
-}
+};
 
 module.exports = Utils;
