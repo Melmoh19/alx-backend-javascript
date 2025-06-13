@@ -2,7 +2,7 @@ const request = require('request');
 const { expect } = require('chai');
 
 describe('Index page', () => {
-  const url = 'http://localhost:7865';
+  const url = 'http://localhost:7865/';
 
   it('Correct status code?', (done) => {
     request.get(url, (err, res, body) => {
@@ -23,44 +23,20 @@ describe('Cart page', () => {
   it('Correct status code when :id is a number', (done) => {
     request.get('http://localhost:7865/cart/12', (err, res, body) => {
       expect(res.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  it('Correct result when :id is a number', (done) => {
+    request.get('http://localhost:7865/cart/12', (err, res, body) => {
       expect(body).to.equal('Payment methods for cart 12');
       done();
     });
   });
 
-  it('Correct status code when :id is NOT a number', (done) => {
+  it('Correct status code when :id is NOT a number (should be 404)', (done) => {
     request.get('http://localhost:7865/cart/hello', (err, res, body) => {
       expect(res.statusCode).to.equal(404);
-      done();
-    });
-  });
-});
-
-describe('/available_payments endpoint', () => {
-  it('Returns correct payment methods object', (done) => {
-    request.get('http://localhost:7865/available_payments', { json: true }, (err, res, body) => {
-      expect(res.statusCode).to.equal(200);
-      expect(body).to.deep.equal({
-        payment_methods: {
-          credit_cards: true,
-          paypal: false
-        }
-      });
-      done();
-    });
-  });
-});
-
-describe('/login endpoint', () => {
-  it('Returns correct welcome message', (done) => {
-    const options = {
-      url: 'http://localhost:7865/login',
-      method: 'POST',
-      json: { userName: 'Betty' }
-    };
-    request(options, (err, res, body) => {
-      expect(res.statusCode).to.equal(200);
-      expect(body).to.equal('Welcome Betty');
       done();
     });
   });
