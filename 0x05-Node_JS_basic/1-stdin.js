@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Display welcome message
-process.stdout.write('Welcome to ALX, what is your name?\n');
+process.stdout.write('Welcome to Holberton, what is your name?\n');
 
 // Set stdin encoding to utf8
 process.stdin.setEncoding('utf8');
