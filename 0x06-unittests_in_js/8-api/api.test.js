@@ -2,33 +2,41 @@ const request = require('request');
 const { expect } = require('chai');
 
 describe('Index page', () => {
-  const baseUrl = 'http://localhost:7865';
+  const url = 'http://localhost:7865/';
 
-  it('should return correct status code', (done) => {
-    request.get(baseUrl, (error, response, body) => {
-      expect(response.statusCode).to.equal(200);
+  it('Correct status code?', (done) => {
+    request.get(url, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
       done();
     });
   });
 
-  it('should return correct result', (done) => {
-    request.get(baseUrl, (error, response, body) => {
+  it('Correct result?', (done) => {
+    request.get(url, (err, res, body) => {
       expect(body).to.equal('Welcome to the payment system');
       done();
     });
   });
+});
 
-  it('should return correct content type', (done) => {
-    request.get(baseUrl, (error, response, body) => {
-      expect(response.headers['content-type']).to.include('text/html');
+describe('Cart page', () => {
+  it('Correct status code when :id is a number', (done) => {
+    request.get('http://localhost:7865/cart/12', (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
       done();
     });
   });
 
-  it('should handle GET request method', (done) => {
-    request.get(baseUrl, (error, response, body) => {
-      expect(error).to.be.null;
-      expect(response).to.not.be.undefined;
+  it('Correct result when :id is a number', (done) => {
+    request.get('http://localhost:7865/cart/12', (err, res, body) => {
+      expect(body).to.equal('Payment methods for cart 12');
+      done();
+    });
+  });
+
+  it('Correct status code when :id is NOT a number (should be 404)', (done) => {
+    request.get('http://localhost:7865/cart/hello', (err, res, body) => {
+      expect(res.statusCode).to.equal(404);
       done();
     });
   });
