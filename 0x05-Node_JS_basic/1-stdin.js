@@ -1,5 +1,5 @@
 // Display welcome message
-console.log('Welcome to ALX, what is your name?');
+console.log('Welcome to Holberton, what is your name?');
 
 // Set stdin to resume and set encoding
 process.stdin.resume();
